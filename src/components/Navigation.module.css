@@ -1,0 +1,64 @@
+/* ------------------- 폰트 ------------------ */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ------------------------------ */
+
+.Navigation {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.nav div {
+  margin: 0;
+  cursor: pointer;
+  font-family: "Pretendard-Regular";
+}
+
+.dropdown {
+  position: absolute;
+  width: 150px;
+  top: 100%; /* 드롭다운이 제목 바로 아래에 위치 */
+  left: 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dropdown a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+/*  ------------------- 로그인 버튼 ------------------- */
+.login_btn a {
+  color: gray;
+}
