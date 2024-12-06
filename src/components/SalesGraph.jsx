@@ -93,9 +93,7 @@ function SalesGraph({ selectedData }) {
       datasets: [
         {
           label: "주간 총 매출액",
-          data: [
-            95, 80, 120, 130, 100, 110, 85, 95, 80, 120, 130, 100, 110, 85,
-          ],
+          data: [95, 80, 120, 130, 100, 110, 85],
           fill: false,
           borderColor: "rgb(153, 102, 255)",
           tension: 0.1,

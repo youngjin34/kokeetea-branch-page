@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SalesGraph from "../components/SalesGraph";
 import style from "./SalesStatistics.module.css";
 import MonthlyBestMenu from "../components/MonthlyBestMenu";
+import SalesGrowthChart from "../components/SalesGrowthChart";
 
 function Home() {
   const [selectedData, setSelectedData] = useState("daily"); // 기본값은 '일간 총 매출액'
@@ -42,6 +43,9 @@ function Home() {
       <div className={style.chart}>
         <SalesGraph selectedData={selectedData} />
         <MonthlyBestMenu />
+      </div>
+      <div>
+        <SalesGrowthChart />
       </div>
     </div>
   );
