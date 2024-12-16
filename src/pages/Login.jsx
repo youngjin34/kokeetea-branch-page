@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./Login.module.css"; // 모듈화된 스타일 사용
+import style from "./Login.module.css"; // 모듈화된 스타일 사용
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,8 +14,8 @@ function Login() {
   };
 
   return (
-    <div className={styles.cont}>
-      <div className={`${styles.form} ${styles["sign-in"]}`}>
+    <div className={style.Login}>
+      <div className={`${style.form}`}>
         <h2>환영합니다</h2>
         <label>
           <span>Email</span>
@@ -35,7 +35,7 @@ function Login() {
             required
           />
         </label>
-        <button type="button" className={styles.submit} onClick={handleSubmit}>
+        <button type="button" className={style.submit} onClick={handleSubmit}>
           로그인
         </button>
       </div>

@@ -1,0 +1,43 @@
+.MonthlyStatistics {
+  padding-top: 30px;
+}
+
+.chartContainer {
+  display: flex;
+  gap: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.summary {
+  width: 45%;
+  height: 150px;
+  font-size: 16px; /* 폰트 크기 조정 */
+  color: #555;
+
+  padding: 20px;
+
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pie_chart:last-child {
+  height: 550px;
+}
+
+.chart {
+  flex: 1;
+  min-width: 250px; /* 최소 너비를 250px로 설정 */
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

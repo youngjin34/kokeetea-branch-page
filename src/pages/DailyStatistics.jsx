@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Line } from "react-chartjs-2";
+import React, { useEffect, useRef, useState } from "react";
+import { getElementAtEvent, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,19 +30,35 @@ const dailySales = [
 
 // 날짜들
 const dates = [
-  "2023-01-01",
-  "2023-01-02",
-  "2023-01-03",
-  "2023-01-04",
-  "2023-01-05",
-  "2023-01-06",
-  "2023-01-07",
-  "2023-01-08",
-  "2023-01-09",
-  "2023-01-10",
-  "2023-01-11",
-  "2023-01-12",
+  "2024-12-01",
+  "2024-12-02",
+  "2024-12-03",
+  "2024-12-04",
+  "2024-12-05",
+  "2024-12-06",
+  "2024-12-07",
+  "2024-12-08",
+  "2024-12-09",
+  "2024-12-10",
+  "2024-12-11",
+  "2024-12-12",
 ];
+
+// 날짜별 매출 요약 데이터 (예시)
+const dailySummary = {
+  "2024-12-01": { topProduct: "아메리카노", peakTime: "3pm ~ 5pm" },
+  "2024-12-02": { topProduct: "카페라떼", peakTime: "1pm ~ 3pm" },
+  "2024-12-03": { topProduct: "카푸치노", peakTime: "4pm ~ 6pm" },
+  "2024-12-04": { topProduct: "모카", peakTime: "2pm ~ 4pm" },
+  "2024-12-05": { topProduct: "아메리카노", peakTime: "5pm ~ 7pm" },
+  "2024-12-06": { topProduct: "에스프레소", peakTime: "6pm ~ 8pm" },
+  "2024-12-07": { topProduct: "아메리카노", peakTime: "10am ~ 12pm" },
+  "2024-12-08": { topProduct: "카페라떼", peakTime: "12pm ~ 2pm" },
+  "2024-12-09": { topProduct: "아메리카노", peakTime: "2pm ~ 4pm" },
+  "2024-12-10": { topProduct: "모카", peakTime: "3pm ~ 5pm" },
+  "2024-12-11": { topProduct: "카푸치노", peakTime: "1pm ~ 3pm" },
+  "2024-12-12": { topProduct: "에스프레소", peakTime: "5pm ~ 7pm" },
+};
 
 // 평균 매출
 const averageSales =
@@ -113,45 +129,62 @@ function DailySalesGrowthChart() {
   const [totalSalesToday, setTotalSalesToday] = useState(
     dailySales[dailySales.length - 1]
   ); // 오늘의 매출
+  const [topProduct, setTopProduct] = useState("아메리카노"); // 기본 제품
+  const [peakTime, setPeakTime] = useState("3pm ~ 5pm"); // 기본 피크 시간대
+  const [animationClass, setAnimationClass] = useState(""); // 애니메이션 클래스 추가
+
+  const chartRef = useRef();
 
   // 해당 날짜에 대한 매출 요약 업데이트
   const handleClick = (event) => {
-    const chart = event.chart;
-    const elements = chart.getElementsAtEventForMode(
-      event,
-      "nearest",
-      { intersect: true },
-      false
-    );
-    if (elements.length) {
-      const index = elements[0].index; // 클릭된 막대의 인덱스
-      const date = dates[index]; // 클릭된 날짜
-      setSelectedDate(date);
-      setTotalSalesToday(dailySales[index]);
+    const chart = chartRef.current;
+
+    if (chart) {
+      const elements = getElementAtEvent(chart, event);
+
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        const date = dates[index];
+
+        setSelectedDate(date);
+        setTotalSalesToday(dailySales[index]);
+
+        // 해당 날짜의 데이터로 상태 업데이트
+        setTopProduct(dailySummary[date]?.topProduct || "정보 없음");
+        setPeakTime(dailySummary[date]?.peakTime || "정보 없음");
+
+        // 애니메이션 클래스 업데이트 (fadeIn과 slideIn을 동시에 적용)
+        setAnimationClass(`${style.fadeIn} ${style.slideIn}`);
+
+        // 애니메이션 클래스 초기화 (애니메이션 반복을 위한 설정)
+        setTimeout(() => setAnimationClass(""), 1500);
+      }
     }
   };
 
   return (
-    <div>
+    <div className={style.DailyStatistics}>
       <h2>일별 매출 및 성장률</h2>
       <Line
+        style={{ cursor: "pointer" }}
+        ref={chartRef}
         data={salesData}
         options={options}
         height={400}
         width={800}
-        onClick={handleClick}
+        onClick={handleClick} // 클릭 이벤트 핸들러 연결
       />
 
-      <div className={style.salesSummary}>
+      <div className={`${style.salesSummary} ${animationClass}`}>
         <h3>{selectedDate} 매출 요약</h3>
         <p>
-          <span>총 매출:</span> {totalSalesToday}원
+          <span>⭐ 총 매출:</span> {totalSalesToday}원
         </p>
         <p>
-          <span>가장 많이 팔린 제품:</span> 아메리카노
+          <span>☕ 가장 많이 팔린 제품:</span> {topProduct}
         </p>
         <p>
-          <span>피크 시간대:</span> 3pm ~ 5pm
+          <span>🕑 피크 시간대:</span> {peakTime}
         </p>
       </div>
     </div>

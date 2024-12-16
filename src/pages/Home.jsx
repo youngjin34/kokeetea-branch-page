@@ -4,10 +4,10 @@ import style from "./Home.module.css";
 function Home() {
   // 슬라이드 이미지 배열
   const images = [
-    "../../public/images/1_img.png",
-    "../../public/images/kokeetea_drink.jpg",
-    "../../public/images/main_004.png",
-    "../../public/images/main_006.png",
+    "/images/1_img.png",
+    "/images/kokeetea_drink.jpg",
+    "/images/main_004.png",
+    "/images/main_006.png",
   ];
 
   // 현재 이미지 인덱스 상태 관리
@@ -53,6 +53,42 @@ function Home() {
           </button>
         </div>
       </div>
+      <h2 className={style.kokeetea_sns}>@KOKEETEA SNS</h2>
+      <ul className={style.sns_container}>
+        <li>
+          <a
+            href="https://www.instagram.com/kokeetea/"
+            target="_blank"
+            rel="opener"
+            className="link"
+          >
+            <img src="/images/insta.png" alt="" width="35" height="35" />
+            <p>Kokee Tea</p>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.youtube.com/@kokeetea2886"
+            target="_blank"
+            rel="opener"
+            className="link"
+          >
+            <img src="/images/youtube.png" alt="" width="35" height="35" />
+            <p>코키티</p>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://ko-kr.facebook.com/luvkokeetea/"
+            target="_blank"
+            rel="opener"
+            className="link"
+          >
+            <img src="/images/facebook.png" alt="" width="35" height="35" />
+            <p>코키티</p>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }

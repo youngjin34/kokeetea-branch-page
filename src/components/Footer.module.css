@@ -6,7 +6,6 @@
 }
 
 .img {
-  margin-left: 100px;
   display: flex;
   gap: 30px;
   justify-content: center;
@@ -25,8 +24,9 @@
 /* --------------- hr 태그 ----------------- */
 .divider {
   position: relative;
-  margin-top: 90px;
+  margin-top: 30px;
   height: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .div_transparent:before {

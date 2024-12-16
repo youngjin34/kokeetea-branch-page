@@ -1,0 +1,45 @@
+.ManageBranch {
+  padding-top: 30px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.branchCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.branchCard {
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.branchCard h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.branchCard p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.branchCard p strong {
+  font-weight: bold;
+}
+
+.branchCard:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.05);
+  transition: all 0.3s;
+}

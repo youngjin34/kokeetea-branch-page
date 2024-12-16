@@ -15,9 +15,13 @@
 /* ------------------------------------ */
 
 .Header {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
   display: flex;
   justify-content: center;
-  background-color: #9bc2c791;
+  background: linear-gradient(to right, #d4e6e3, #88bdbc);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .title {

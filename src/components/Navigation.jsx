@@ -62,7 +62,9 @@ function Navigation() {
         )}
       </div>
       <div className={style.login_btn}>
-        <Link to="/login">로그인</Link>
+        <Link to="/login">
+          <span className="material-symbols-outlined">login</span>
+        </Link>
       </div>
     </div>
   );

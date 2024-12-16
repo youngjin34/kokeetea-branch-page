@@ -1,9 +1,37 @@
 .DailyStatistics {
+  padding-top: 30px;
 }
 
 /* SalesSummary.module.css */
+.fadeIn {
+  animation: fadeInAnimation 1.5s ease-out;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slideIn {
+  animation: slideInAnimation 0.5s ease-out;
+}
+
+@keyframes slideInAnimation {
+  0% {
+    transform: translateY(20px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .salesSummary {
-  background-color: #f0f8ff; /* 연한 파란색 배경 */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -25,11 +53,5 @@
 
 .salesSummary p span {
   font-weight: bold;
-  color: #27ae60; /* 강조된 부분은 초록색 */
-}
-
-.salesSummary .icon {
-  font-size: 24px;
-  margin-right: 10px;
-  color: #e74c3c; /* 빨간색 아이콘 */
+  color: #000000; /* 강조된 부분은 초록색 */
 }
