@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import style from "./ManageBranch.module.css";
+import { useState } from "react";
 
 function ManageBranch() {
+  const [search, setSearch] = useState("");
+
   // 더미 데이터 정의
   const branches = [
     {
@@ -41,11 +44,33 @@ function ManageBranch() {
     },
   ];
 
+  const onChangeSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const getFilteredBranch = () => {
+    if (search === "") {
+      return branches;
+    }
+
+    return branches.filter((branch) => branch.branchName.includes(search));
+  };
+
+  const filteredBranch = getFilteredBranch();
+
   return (
     <div className={style.ManageBranch}>
-      <h1>지점 관리</h1>
+      <div className={style.top}>
+        <h1 className={style["manage-branch"]}>지점 관리</h1>
+        <input
+          className={style.search_input}
+          type="text"
+          value={search}
+          onChange={onChangeSearch}
+        />
+      </div>
       <div className={style.branchCards}>
-        {branches.map((branch) => (
+        {filteredBranch.map((branch) => (
           <Link key={branch.id} to={`/branch/${branch.id}`}>
             <div className={style.branchCard}>
               <h2>{branch.branchName}</h2>
@@ -58,7 +83,6 @@ function ManageBranch() {
               <p>
                 <strong>연락처:</strong> {branch.phone}
               </p>
-              {/* 상세보기 링크 추가 */}
             </div>
           </Link>
         ))}
