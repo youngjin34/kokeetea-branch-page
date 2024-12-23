@@ -398,7 +398,6 @@ const dummyData = {
 
 const ManageStock = () => {
   const [selectedBranch, setSelectedBranch] = useState("구로점(본점)");
-
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
@@ -425,7 +424,12 @@ const ManageStock = () => {
       <div className={style.stockList}>
         {dummyData[selectedBranch].map((item) => (
           <div key={item.id}>
-            <div className={style.card} onClick={() => openModal(item)}>
+            <div
+              className={`${style.card} ${
+                item.quantity <= 10 ? style.lowStock : ""
+              }`}
+              onClick={() => openModal(item)}
+            >
               <img
                 src={item.image}
                 alt={item.material}

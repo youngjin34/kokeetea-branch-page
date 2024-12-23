@@ -48,6 +48,15 @@ h4 {
   transform: translateY(-3px);
 }
 
+.card.lowStock {
+  background-color: #ffcccc; /* 재고 부족 시 빨간 배경 */
+}
+
+.card.lowStock h3,
+.card.lowStock p {
+  color: #b30000; /* 텍스트 색상 변경 */
+}
+
 .itemImage {
   width: 90%;
   height: 200px;

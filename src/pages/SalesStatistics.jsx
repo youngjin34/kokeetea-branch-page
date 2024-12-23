@@ -4,6 +4,7 @@ import style from "./SalesStatistics.module.css";
 import MonthlyBestMenu from "../components/MonthlyBestMenu";
 import SalesGrowthChart from "../components/SalesGrowthChart";
 
+// 본점에서 로그인 했을 때 지점 총 매출 그래프 있어야 합니다..!!
 function Home() {
   const [selectedData, setSelectedData] = useState("daily"); // 기본값은 '일간 총 매출액'
 
