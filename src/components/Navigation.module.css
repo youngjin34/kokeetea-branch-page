@@ -1,8 +1,8 @@
 /* ------------------- 폰트 ------------------ */
 @font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -28,7 +28,7 @@ a {
 .nav div {
   margin: 0;
   cursor: pointer;
-  font-family: "Pretendard-Regular";
+  font-family: 'Pretendard-Regular';
 }
 
 .nav div:hover {
@@ -62,6 +62,10 @@ a {
 }
 
 /*  ------------------- 로그인 버튼 ------------------- */
-.login_btn a {
+.login_btn button {
   color: black;
+  font-family: 'Pretendard-Regular';
+  font-size: 16px;
+  padding: 0;
+  width: 165px;
 }
