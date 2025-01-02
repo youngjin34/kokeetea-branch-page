@@ -1,8 +1,8 @@
 /* ------------------- 폰트 ------------------ */
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -13,6 +13,9 @@
   display: flex;
   gap: 40px;
   justify-content: center;
+  align-items: center;
+
+  padding-right: 200px;
 }
 
 a {
@@ -28,7 +31,7 @@ a {
 .nav div {
   margin: 0;
   cursor: pointer;
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
 }
 
 .nav div:hover {
@@ -62,10 +65,33 @@ a {
 }
 
 /*  ------------------- 로그인 버튼 ------------------- */
-.login_btn button {
+.login_btn {
+  position: absolute;
+  right: -50px;
+  top: -40px;
   color: black;
-  font-family: 'Pretendard-Regular';
-  font-size: 16px;
-  padding: 0;
-  width: 165px;
+  font-family: "Pretendard-Regular";
+  font-size: 14px;
+}
+
+.login_btn span {
+  position: relative;
+  right: 50px;
+  cursor: pointer;
+}
+
+.login_btn button {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  width: 70px;
+  color: black;
+  background-color: #90c5c5;
+  font-family: "Pretendard-Regular";
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.branch_name:hover {
+  color: #263238;
 }

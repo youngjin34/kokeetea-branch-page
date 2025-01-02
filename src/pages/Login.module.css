@@ -1,3 +1,12 @@
+/* ------------------- 폰트 ------------------ */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 input,
 button {
   border: none;
@@ -71,6 +80,12 @@ input:focus {
 .submit {
   margin-top: 40px;
   margin-bottom: 20px;
+  color: black;
   background: #9bc2c791;
   text-transform: uppercase;
+  font-family: "Pretendard-Regular";
+}
+
+.submit:hover {
+  background: #7fa0a2;
 }

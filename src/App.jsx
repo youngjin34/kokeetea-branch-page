@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import SalesStatistics from './pages/SalesStatistics';
-import style from './App.module.css';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Footer from './components/Footer';
-import DailyStatistics from './pages/DailyStatistics';
-import MonthlyStatistics from './pages/MonthlyStatistics';
-import ManageStock from './pages/ManageStock';
-import ManageBranch from './pages/ManageBranch';
-import BranchDetail from './pages/branchDetail';
-import { AuthProvider } from './components/AuthContext';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import SalesStatistics from "./pages/SalesStatistics";
+import style from "./App.module.css";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import DailyStatistics from "./pages/DailyStatistics";
+import MonthlyStatistics from "./pages/MonthlyStatistics";
+import ManageStock from "./pages/ManageStock";
+import ManageBranch from "./pages/ManageBranch";
+import BranchDetail from "./pages/branchDetail";
+import { AuthProvider } from "./components/AuthContext";
 
 function App() {
   return (

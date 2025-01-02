@@ -1,406 +1,39 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import style from "./ManageStock.module.css";
 
-const dummyData = {
-  "구로점(본점)": [
-    {
-      id: 1,
-      material: "커피원두",
-      category: "주재료",
-      quantity: 50,
-      price: 5000,
-      image: "/images/coffeebean.png",
-    },
-    {
-      id: 2,
-      material: "홍차잎",
-      category: "주재료",
-      quantity: 30,
-      price: 3000,
-      image: "/images/blacktea.png",
-    },
-    {
-      id: 3,
-      material: "녹차잎",
-      category: "주재료",
-      quantity: 20,
-      price: 4000,
-      image: "/images/greentea.png",
-    },
-    {
-      id: 4,
-      material: "오렌지",
-      category: "주재료",
-      quantity: 15,
-      price: 2000,
-      image: "/images/orange.png",
-    },
-    {
-      id: 5,
-      material: "포도",
-      category: "주재료",
-      quantity: 25,
-      price: 3500,
-      image: "/images/grape.png",
-    },
-    {
-      id: 6,
-      material: "우유",
-      category: "부재료",
-      quantity: 100,
-      price: 1000,
-      image: "/images/milk.png",
-    },
-    {
-      id: 7,
-      material: "초콜릿",
-      category: "부재료",
-      quantity: 50,
-      price: 1500,
-      image: "/images/chocolate.png",
-    },
-    {
-      id: 8,
-      material: "시나몬",
-      category: "부재료",
-      quantity: 10,
-      price: 500,
-      image: "/images/cinnamon.png",
-    },
-    {
-      id: 9,
-      material: "꿀",
-      category: "부재료",
-      quantity: 5,
-      price: 8000,
-      image: "/images/honey.png",
-    },
-    {
-      id: 10,
-      material: "설탕",
-      category: "부재료",
-      quantity: 200,
-      price: 100,
-      image: "/images/sugar.png",
-    },
-    {
-      id: 11,
-      material: "휘핑크림",
-      category: "부재료",
-      quantity: 30,
-      price: 1200,
-      image: "/images/whippingcream.png",
-    },
-    {
-      id: 12,
-      material: "타피오카펄",
-      category: "부재료",
-      quantity: 40,
-      price: 600,
-      image: "/images/tapiocapearl.png",
-    },
-  ],
-  강남점: [
-    {
-      id: 1,
-      material: "커피원두",
-      category: "주재료",
-      quantity: 50,
-      price: 5000,
-      image: "/images/coffeebean.png",
-    },
-    {
-      id: 2,
-      material: "홍차잎",
-      category: "주재료",
-      quantity: 30,
-      price: 3000,
-      image: "/images/blacktea.png",
-    },
-    {
-      id: 3,
-      material: "녹차잎",
-      category: "주재료",
-      quantity: 20,
-      price: 4000,
-      image: "/images/greentea.png",
-    },
-    {
-      id: 4,
-      material: "오렌지",
-      category: "주재료",
-      quantity: 20,
-      price: 2000,
-      image: "/images/orange.png",
-    },
-    {
-      id: 5,
-      material: "포도",
-      category: "주재료",
-      quantity: 40,
-      price: 3500,
-      image: "/images/grape.png",
-    },
-    {
-      id: 6,
-      material: "우유",
-      category: "부재료",
-      quantity: 200,
-      price: 1000,
-      image: "/images/milk.png",
-    },
-    {
-      id: 7,
-      material: "초콜릿",
-      category: "부재료",
-      quantity: 58,
-      price: 1500,
-      image: "/images/chocolate.png",
-    },
-    {
-      id: 8,
-      material: "시나몬",
-      category: "부재료",
-      quantity: 20,
-      price: 500,
-      image: "/images/cinnamon.png",
-    },
-    {
-      id: 9,
-      material: "꿀",
-      category: "부재료",
-      quantity: 50,
-      price: 8000,
-      image: "/images/honey.png",
-    },
-    {
-      id: 10,
-      material: "설탕",
-      category: "부재료",
-      quantity: 100,
-      price: 100,
-      image: "/images/sugar.png",
-    },
-    {
-      id: 11,
-      material: "휘핑크림",
-      category: "부재료",
-      quantity: 32,
-      price: 1200,
-      image: "/images/whippingcream.png",
-    },
-    {
-      id: 12,
-      material: "타피오카펄",
-      category: "부재료",
-      quantity: 43,
-      price: 600,
-      image: "/images/tapiocapearl.png",
-    },
-  ],
-  여의도점: [
-    {
-      id: 1,
-      material: "커피원두",
-      category: "주재료",
-      quantity: 50,
-      price: 5000,
-      image: "/images/coffeebean.png",
-    },
-    {
-      id: 2,
-      material: "홍차잎",
-      category: "주재료",
-      quantity: 30,
-      price: 3000,
-      image: "/images/blacktea.png",
-    },
-    {
-      id: 3,
-      material: "녹차잎",
-      category: "주재료",
-      quantity: 20,
-      price: 4000,
-      image: "/images/greentea.png",
-    },
-    {
-      id: 4,
-      material: "오렌지",
-      category: "주재료",
-      quantity: 20,
-      price: 2000,
-      image: "/images/orange.png",
-    },
-    {
-      id: 5,
-      material: "포도",
-      category: "주재료",
-      quantity: 40,
-      price: 3500,
-      image: "/images/grape.png",
-    },
-    {
-      id: 6,
-      material: "우유",
-      category: "부재료",
-      quantity: 200,
-      price: 1000,
-      image: "/images/milk.png",
-    },
-    {
-      id: 7,
-      material: "초콜릿",
-      category: "부재료",
-      quantity: 58,
-      price: 1500,
-      image: "/images/chocolate.png",
-    },
-    {
-      id: 8,
-      material: "시나몬",
-      category: "부재료",
-      quantity: 20,
-      price: 500,
-      image: "/images/cinnamon.png",
-    },
-    {
-      id: 9,
-      material: "꿀",
-      category: "부재료",
-      quantity: 50,
-      price: 8000,
-      image: "/images/honey.png",
-    },
-    {
-      id: 10,
-      material: "설탕",
-      category: "부재료",
-      quantity: 100,
-      price: 100,
-      image: "/images/sugar.png",
-    },
-    {
-      id: 11,
-      material: "휘핑크림",
-      category: "부재료",
-      quantity: 32,
-      price: 1200,
-      image: "/images/whippingcream.png",
-    },
-    {
-      id: 12,
-      material: "타피오카펄",
-      category: "부재료",
-      quantity: 43,
-      price: 600,
-      image: "/images/tapiocapearl.png",
-    },
-  ],
-  신도림점: [
-    {
-      id: 1,
-      material: "커피원두",
-      category: "주재료",
-      quantity: 50,
-      price: 5000,
-      image: "/images/coffeebean.png",
-    },
-    {
-      id: 2,
-      material: "홍차잎",
-      category: "주재료",
-      quantity: 30,
-      price: 3000,
-      image: "/images/blacktea.png",
-    },
-    {
-      id: 3,
-      material: "녹차잎",
-      category: "주재료",
-      quantity: 20,
-      price: 4000,
-      image: "/images/greentea.png",
-    },
-    {
-      id: 4,
-      material: "오렌지",
-      category: "주재료",
-      quantity: 15,
-      price: 2000,
-      image: "/images/orange.png",
-    },
-    {
-      id: 5,
-      material: "포도",
-      category: "주재료",
-      quantity: 25,
-      price: 3500,
-      image: "/images/grape.png",
-    },
-    {
-      id: 6,
-      material: "우유",
-      category: "부재료",
-      quantity: 100,
-      price: 1000,
-      image: "/images/milk.png",
-    },
-    {
-      id: 7,
-      material: "초콜릿",
-      category: "부재료",
-      quantity: 50,
-      price: 1500,
-      image: "/images/chocolate.png",
-    },
-    {
-      id: 8,
-      material: "시나몬",
-      category: "부재료",
-      quantity: 10,
-      price: 500,
-      image: "/images/cinnamon.png",
-    },
-    {
-      id: 9,
-      material: "꿀",
-      category: "부재료",
-      quantity: 5,
-      price: 8000,
-      image: "/images/honey.png",
-    },
-    {
-      id: 10,
-      material: "설탕",
-      category: "부재료",
-      quantity: 200,
-      price: 100,
-      image: "/images/sugar.png",
-    },
-    {
-      id: 11,
-      material: "휘핑크림",
-      category: "부재료",
-      quantity: 30,
-      price: 1200,
-      image: "/images/whippingcream.png",
-    },
-    {
-      id: 12,
-      material: "타피오카펄",
-      category: "부재료",
-      quantity: 40,
-      price: 600,
-      image: "/images/tapiocapearl.png",
-    },
-  ],
-};
-
 const ManageStock = () => {
-  const [selectedBranch, setSelectedBranch] = useState("구로점(본점)");
+  const [selectedBranch, setSelectedBranch] = useState("본점");
+  const [stockList, setStockList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [orderQuantity, setOrderQuantity] = useState(0);
   const modalBackground = useRef();
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        // API 호출 (예: /api/ingredient/{branchId}/list)
+        const response = await axios.get(
+          `http://localhost:8080/api/ingredient/1/list`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // JWT 토큰 추가
+            },
+            withCredentials: true,
+          }
+        );
+        setStockList(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("재고 데이터를 가져오는 데 실패했습니다:", error);
+      }
+    };
+
+    fetchStockData();
+  }, [selectedBranch, token]);
 
   const handleBranchChange = (event) => {
     setSelectedBranch(event.target.value);
@@ -409,12 +42,32 @@ const ManageStock = () => {
   const openModal = (item) => {
     setSelectedItem(item);
     setModalOpen(true);
+    setOrderQuantity(item.quantity); // 모달 열 때 기본 재고 수량 설정
+  };
+
+  const handleOrderQuantityChange = (event) => {
+    const value = parseInt(event.target.value, 10);
+    if (value >= 0) {
+      setOrderQuantity(value);
+    }
+  };
+
+  const handleOrderSubmit = () => {
+    // 주문 처리 로직 (API 호출 또는 상태 업데이트)
+    console.log(`주문 제출: ${selectedItem.material}, 수량: ${orderQuantity}`);
+
+    // 주문 후 모달 닫기
+    setModalOpen(false);
   };
 
   return (
     <div className={style.ManageStock}>
       <h1>{selectedBranch} 재고 관리</h1>
-      <select className={style.branchDropdown} onChange={handleBranchChange}>
+      <select
+        className={style.branchDropdown}
+        onChange={handleBranchChange}
+        value={selectedBranch}
+      >
         <option value="구로점(본점)">구로점(본점)</option>
         <option value="강남점">강남점</option>
         <option value="여의도점">여의도점</option>
@@ -422,8 +75,8 @@ const ManageStock = () => {
       </select>
 
       <div className={style.stockList}>
-        {dummyData[selectedBranch].map((item) => (
-          <div key={item.id}>
+        {stockList.map((item) => (
+          <div key={item.ingredient_name}>
             <div
               className={`${style.card} ${
                 item.quantity <= 10 ? style.lowStock : ""
@@ -436,10 +89,9 @@ const ManageStock = () => {
                 className={style.itemImage}
               />
               <hr />
-              <h3>{item.material}</h3>
-              <p className={style.category}>{item.category}</p>
+              <h3>{item.ingredient_name}</h3>
               <p>재고: {item.quantity}</p>
-              <p>가격: {item.price}원</p>
+              <p>가격: {item.ingredient_price}원</p>
             </div>
           </div>
         ))}
@@ -466,12 +118,8 @@ const ManageStock = () => {
               type="number"
               placeholder="재고 입력"
               autoFocus
-              onChange={(event) => {
-                const value = parseInt(event.target.value, 10);
-                if (value < 0) {
-                  event.target.value = 0;
-                }
-              }}
+              value={orderQuantity}
+              onChange={handleOrderQuantityChange}
             />
             <button
               className={style.modal_close_btn}
@@ -479,7 +127,10 @@ const ManageStock = () => {
             >
               ❌
             </button>
-            <button className={`${style.btn} ${style.btn_success}`}>
+            <button
+              className={`${style.btn} ${style.btn_success}`}
+              onClick={handleOrderSubmit}
+            >
               주문
               <i>✔️</i>
             </button>

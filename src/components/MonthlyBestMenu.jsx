@@ -11,20 +11,22 @@ import style from "./MonthlyBestMenu.module.css";
 // Chart.js 요소 등록
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
-function MonthlyBestMenu() {
-  // Chart 데이터와 설정
+function MonthlyBestMenu({ top5 }) {
+  // 데이터가 없는 경우 처리
+  if (!Array.isArray(top5) || top5.length === 0) {
+    return <div>Loading Top5 Menu Data...</div>;
+  }
+
+  // 데이터 매핑
+  const labels = top5.map((item) => item.item_name); // 메뉴 이름
+  const dataValues = top5.map((item) => item.total_sold); // 판매량
+
   const data = {
-    labels: [
-      "나비의 꿈",
-      "샌프란시스코의 장미",
-      "삼다수",
-      "브라운슈카 밀크티",
-      "말차 라떼",
-    ],
+    labels: labels,
     datasets: [
       {
         label: "월간 판매량",
-        data: [11, 16, 7, 3, 14],
+        data: dataValues,
         backgroundColor: [
           "rgb(255, 99, 132)",
           "rgb(75, 192, 192)",

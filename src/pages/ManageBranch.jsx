@@ -5,45 +5,6 @@ import { useState } from "react";
 function ManageBranch() {
   const [search, setSearch] = useState("");
 
-  // 더미 데이터 정의
-  const branches = [
-    {
-      id: 1,
-      email: "branch1@kokeetea.com",
-      branchName: "구로 본점",
-      address: "서울시 구로구",
-      phone: "02-1234-5678",
-    },
-    {
-      id: 2,
-      email: "branch2@kokeetea.com",
-      branchName: "여의도점",
-      address: "서울시 영등포구",
-      phone: "051-9876-5432",
-    },
-    {
-      id: 3,
-      email: "branch3@kokeetea.com",
-      branchName: "강남점",
-      address: "서울시 강남구",
-      phone: "02-3456-7890",
-    },
-    {
-      id: 4,
-      email: "branch4@kokeetea.com",
-      branchName: "신도림점",
-      address: "서울시 영등포구",
-      phone: "02-3456-7890",
-    },
-    {
-      id: 5,
-      email: "branch5@kokeetea.com",
-      branchName: "왕십리점",
-      address: "서울시 성동구",
-      phone: "02-3456-7890",
-    },
-  ];
-
   const onChangeSearch = (event) => {
     setSearch(event.target.value);
   };
