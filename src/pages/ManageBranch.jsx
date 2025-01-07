@@ -1,20 +1,49 @@
 import { Link } from "react-router-dom";
 import style from "./ManageBranch.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function ManageBranch() {
   const [search, setSearch] = useState("");
+  const [branchList, setBranchList] = useState([]);
+
+  const token = sessionStorage.getItem("token"); // 로컬스토리지에서 token 가져오기
 
   const onChangeSearch = (event) => {
     setSearch(event.target.value);
   };
 
+  const fetchBranchList = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.get(
+        `http://localhost:8080/api/branch/page`,
+        config
+      );
+
+      // 응답 데이터에서 list만 추출하여 설정
+      setBranchList(response.data.list);
+    } catch (error) {
+      console.error("브랜치 목록 데이터를 가져오지 못했습니다:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBranchList();
+  }, []);
+
   const getFilteredBranch = () => {
     if (search === "") {
-      return branches;
+      return branchList;
     }
 
-    return branches.filter((branch) => branch.branchName.includes(search));
+    // branch_name으로 검색
+    return branchList.filter((branch) => branch.branch_name.includes(search));
   };
 
   const filteredBranch = getFilteredBranch();
@@ -33,9 +62,9 @@ function ManageBranch() {
       </div>
       <div className={style.branchCards}>
         {filteredBranch.map((branch) => (
-          <Link key={branch.id} to={`/branch/${branch.id}`}>
+          <Link key={branch.branch_id} to={`/branch/${branch.branch_id}`}>
             <div className={style.branchCard}>
-              <h2>{branch.branchName}</h2>
+              <h2>{branch.branch_name}</h2>
               <p>
                 <strong>이메일:</strong> {branch.email}
               </p>

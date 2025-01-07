@@ -29,9 +29,9 @@ function Login() {
 
       console.log("Login Successful:", response.data);
       setIsAuthenticated(true); // 전역 상태 업데이트
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("branch_name", response.data.branch_name); // branch_name 저장
-      localStorage.setItem("branch_id", response.data.branch_id); // branch_name 저장
+      sessionStorage.setItem("token", response.data.token); // sessionStorage로 변경
+      sessionStorage.setItem("branch_name", response.data.branch_name); // branch_name 저장
+      sessionStorage.setItem("branch_id", response.data.branch_id); // branch_name 저장
 
       navigate("/"); // 로그인 성공 시 홈으로 이동
     } catch (err) {

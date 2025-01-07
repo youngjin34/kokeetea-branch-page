@@ -12,13 +12,13 @@ function Navigation() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-    const name = localStorage.getItem("branch_name");
+    const name = sessionStorage.getItem("branch_name");
     if (name) setBranchName(name); // branch_name 가져오기
   }, [isAuthenticated]); // 로그인 상태가 변경될 때마다 갱신
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // 토큰 제거
-    localStorage.removeItem("branch_name"); // branch_name 제거
+    sessionStorage.removeItem("token"); // 토큰 제거
+    sessionStorage.removeItem("branch_name"); // branch_name 제거
     setIsAuthenticated(false); // 상태 초기화
     setShowDropdown(false); // 드롭다운 닫기
     navigate("/login"); // 로그인 페이지로 이동

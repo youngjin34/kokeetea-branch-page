@@ -1,53 +1,48 @@
 import { useParams } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import style from "./BranchDetail.module.css";
 
 function BranchDetail() {
-  // 여기서 받아온 id를 사용해서 DB에서 해당 id에 맞는 branch를 가져와서 정보를 띄워야함
-  // 지금은 그냥 같은 더미 데이터를 넣어서 표현함
-  const { id } = useParams();
+  const { id } = useParams(); // URL 파라미터에서 지점 ID 가져오기
+  const [branch, setBranch] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // 더미 데이터 정의
-  const branches = [
-    {
-      id: 1,
-      email: "branch1@kokeetea.com",
-      branchName: "구로 본점",
-      address: "서울시 구로구",
-      phone: "02-1234-5678",
-    },
-    {
-      id: 2,
-      email: "branch2@kokeetea.com",
-      branchName: "여의도점",
-      address: "서울시 영등포구",
-      phone: "051-9876-5432",
-    },
-    {
-      id: 3,
-      email: "branch3@kokeetea.com",
-      branchName: "강남점",
-      address: "서울시 강남구",
-      phone: "02-3456-7890",
-    },
-    {
-      id: 4,
-      email: "branch4@kokeetea.com",
-      branchName: "신도림점",
-      address: "서울시 영등포구",
-      phone: "02-3456-7890",
-    },
-    {
-      id: 5,
-      email: "branch5@kokeetea.com",
-      branchName: "왕십리점",
-      address: "서울시 성동구",
-      phone: "02-3456-7890",
-    },
-  ];
+  const token = sessionStorage.getItem("token"); // 토큰 가져오기
 
-  // 해당 id에 맞는 지점 찾기
-  const branch = branches.find((branch) => branch.id === parseInt(id));
+  useEffect(() => {
+    const fetchBranch = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`, // 인증 헤더 추가
+          },
+        };
+
+        const response = await axios.get(
+          `http://localhost:8080/api/branch/${id}`,
+          config
+        );
+        setBranch(response.data); // 데이터 상태 업데이트
+      } catch (err) {
+        setError("지점 정보를 가져오는 중 문제가 발생했습니다.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBranch();
+  }, [id, token]);
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   if (!branch) {
     return <div>지점 정보를 찾을 수 없습니다.</div>;

@@ -13,8 +13,8 @@ function SalesStatistics() {
   const [top5, setTop5] = useState([]);
   const [monthlySales, setMonthlySales] = useState();
 
-  const token = localStorage.getItem("token"); // 로컬스토리지에서 token 가져오기
-  const branchId = localStorage.getItem("branch_id");
+  const token = sessionStorage.getItem("token"); // 로컬스토리지에서 token 가져오기
+  // const branchId = sessionStorage.getItem("branch_id");
 
   const handleCardClick = (dataType) => {
     setSelectedData(dataType); // 클릭된 카드를 기반으로 데이터 유형을 설정
@@ -34,23 +34,30 @@ function SalesStatistics() {
         },
       };
 
-      if (period === "daily") {
-        response = await axios.get(
-          `http://localhost:8080/api/admin/sales?period=daily&range=${range}`,
-          config
-        );
-        console.log(response);
-      } else if (period === "weekly") {
-        response = await axios.get(
-          "http://localhost:8080/api/admin/sales?period=weekly",
-          config
-        );
-      } else if (period === "monthly") {
-        response = await axios.get(
-          "http://localhost:8080/api/admin/sales?period=monthly&range=all",
-          config
-        );
-      }
+      // if (period === "daily") {
+      //   response = await axios.get(
+      //     `http://localhost:8080/api/admin/sales?period=daily`,
+      //     config
+      //   );
+      //   console.log(response);
+      // } else if (period === "weekly") {
+      //   response = await axios.get(
+      //     "http://localhost:8080/api/admin/sales?period=weekly",
+      //     config
+      //   );
+      // } else if (period === "monthly") {
+      //   response = await axios.get(
+      //     "http://localhost:8080/api/admin/sales?period=monthly",
+      //     config
+      //   );
+      // }
+
+      response = await axios.get(
+        "http://localhost:8080/api/admin/sales?period=monthly&range=all",
+        config
+      );
+
+      console.log(response.data);
 
       if (response.status === 200) {
         setSalesData(response.data); // 데이터를 받아서 상태에 저장
@@ -115,8 +122,10 @@ function SalesStatistics() {
         },
       };
 
+      const branchId = sessionStorage.getItem("branch_id");
+
       const response = await axios.get(
-        `http://localhost:8080/api/branch/${branchId}/sales?period=monthly&range=all`,
+        `http://localhost:8080/api/branch/${branchId}/sales?period=monthly`,
         config
       );
 

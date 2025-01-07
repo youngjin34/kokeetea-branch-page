@@ -10,7 +10,7 @@ const ManageStock = () => {
   const [orderQuantity, setOrderQuantity] = useState(0);
   const modalBackground = useRef();
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -54,7 +54,9 @@ const ManageStock = () => {
 
   const handleOrderSubmit = () => {
     // 주문 처리 로직 (API 호출 또는 상태 업데이트)
-    console.log(`주문 제출: ${selectedItem.material}, 수량: ${orderQuantity}`);
+    console.log(
+      `주문 제출: ${selectedItem.ingredient_name}, 수량: ${orderQuantity}`
+    );
 
     // 주문 후 모달 닫기
     setModalOpen(false);
@@ -109,9 +111,9 @@ const ManageStock = () => {
         >
           <div className={style.modal_content}>
             <div>
-              <h4>{selectedItem.material}</h4>
+              <h4>{selectedItem.ingredient_name}</h4>
               남은 재고: {selectedItem.quantity} <br />
-              가격: {selectedItem.price}
+              가격: {selectedItem.ingredient_price} 원
             </div>
             <input
               className={style.order_input}
